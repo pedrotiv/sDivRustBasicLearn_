@@ -1,3 +1,5 @@
+mod f2c;
+
 fn main() {
-    println!("Hello, world!");
+    f2c::run();
 }
