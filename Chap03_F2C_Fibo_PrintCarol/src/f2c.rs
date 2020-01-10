@@ -1,20 +1,26 @@
-
 use std::io;
 
 pub fn run() {
-    // It convert temperatures between C, F or K
-    let mut temp_in: f64 = 0.0;
-    let mut temp_out: f64 = 0.0;
-    let mut unit_in: char = 'f';
-    let mut unit_out: char = 'c';
-    let mut enter_str = String::new();
-
-    loop{
-        println!("Imput temperature to convert and input and output units.");
-        println!("for exemple: 41.2 C F, it will convert the 41.2 Celsius to Fahrenheit");
-        println!("default condition: input: f output: c (if we imput only a number");
-        io::stdin().read_line(&mut enter_str).expect("Failed to read line");
-        let mut inter = enter_str.split_whitespace();
+    // Convert temperatures between Fahrenheit and Celsius
+    let mut in_temp = String::new();
+    loop {        
+        println!("Input temperature to convert to Celsius and Fahrenheit or zero to stop: ");
+        io::stdin()
+            .read_line(&mut in_temp)
+            .expect("Failed to read line");
+        let in_temp: f64 = match in_temp.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+        {
+            let out_c: f64 = (in_temp - 32.0) / 1.8;
+            let out_f: f64 = 1.8 * in_temp + 32.0;
+            println!("The temperature {} F is {} C", in_temp, out_c);
+            println!("The temperature {} C is {} F", in_temp, out_f);
+        }
     }
-
 }
+/* Next: 
+*       Create a code to exit
+*       The loop doesn't work afer firt interation
+*/

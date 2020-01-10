@@ -1,5 +1,7 @@
-mod f2c;
+// mod f2c;
+mod fibo;
 
 fn main() {
-    f2c::run();
+    // f2c::run();
+    fibo::run();
 }
