@@ -1,8 +1,28 @@
-use std::io
+// use std::io;
 
 // print th lyrics to  "The twelve days of Christmas"
-// using the repetition of the song.
+// using the repetition of the song to minimaze the code.
+// We go only until the fourth strophe
 pub fn run(){
+    let days = ["first", "second","third", "fourth"];
+    let first_verse_a = "On the";
+    let first_verse_b = "day of Christmas,";    
+    let last_verse = " patridge in a pear trees.";
+    let center_verses = ["","Two turtle doves,", "Three French hens," ]
+    let mut prv_str = "";
+
+    for i in 0..4{
+        println!("{} {} {}", first_verse_a, days[i],first_verse_b );
+        println!("my true love sent to me");
+        if i == 0{
+            println!("A {}\n", last_verse);
+        } else {
+            prv_str =  center_verses[i] + "\n" + prv_str;
+            println!("{}",prv_str);
+            println!("And {}\n", last_verse);
+        }
+
+    }
 
 
 }
