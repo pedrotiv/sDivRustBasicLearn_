@@ -28,22 +28,31 @@ pub fn run() {
 
     // Rust even checks to make sure the correct number of arguments are
     // used.
-    println!("My name is {0}, {1} {0}", "Bond");
-    // FIXME ^ Add the missing argument: "James"
+    println!("My name is {0}, {1} {0}", "Bond", "James");
+    // FIXME ^ Add the missing argument: "James" FIXED
 
     // Create a structure named `Structure` which contains an `i32`.
-    #[allow(dead_code)]
+    // #[allow(dead_code)]
+    #[derive(Debug)]
     struct Structure(i32);
 
     // However, custom types such as this structure require more complicated
     // handling. This will not work.
-    println!("This struct `{}` won't print...", Structure(3));
-    // FIXME ^ Comment out this line.
+    // println!("This struct `{}` won't print...", Structure(3)); 
+    // FIXME ^ Comment out this line. FIXED
+    println!("This struct `{:?}` won't print in the original form...", Structure(3));
+
+    // Add a println! macro that prints: Pi is roughly 3.142 by controlling the number of decimal places shown.
+    //  For the purposes of this exercise, use let pi = 3.141592 as an estimate for pi. 
+    //  (Hint: you may need to check the std::fmt documentation for setting the number of decimals to display)
+    let pi: f64 = 3.141592;
+    println!("The value of PI with 3 decimal places is {:.3}", pi);
+
 }
 
 /*
 * Next:
-*   Fix the two issues in the above code (see FIXME) so that it runs without error.
+*   Fix the two issues in the above code (see FIXME) so that it runs without error. FIXED
 *   Add a println! macro that prints: Pi is roughly 3.142 by controlling the number of decimal places shown.
      For the purposes of this exercise, use let pi = 3.141592 as an estimate for pi. 
      (Hint: you may need to check the std::fmt documentation for setting the number of decimals to display)
