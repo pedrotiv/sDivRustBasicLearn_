@@ -1,6 +1,14 @@
+use std::fmt;
+
 // The following struct is for the activity.
 #[derive(Debug)]
 struct Matrix(f32, f32, f32, f32);
+// Implement Display for activity 1
+impl fmt::Display for Matrix{
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result{
+        write!(f,"( {}, {} )\n( {}, {} )", self.0,self.1,self.2,self.3)           
+    }
+}
 
 
 fn main() {
@@ -70,6 +78,7 @@ fn main() {
 
     // Tuples are printable
     println!("tuple of tuples: {:?}", tuple_of_tuples);
+    println!("first elemet of inner tuple: {},",(tuple_of_tuples.0).0);
 
     // But long Tuples cannot be printed
     // let too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
@@ -94,15 +103,9 @@ fn main() {
 
     let matrix = Matrix(1.1, 1.2, 2.1, 2.2);
     println!("{:?}", matrix);
-
-// WORK IN TI ****************************************
-    // #[derive(Debug)]
-    // let ti = (4,false);
-    // #[derive(Debug)]
-    // let tr = reverse(ti);
-    // println!("The reverse of the tuple {} is {}", ti,tr);
-
-}
+    println!("Matrix:\n{}", matrix);
+    println!("Transpose:\n{}",transpose(matrix));    
+    }
 
 // Tuples can be used as function arguments and as return values
 fn reverse(pair: (i32, bool)) -> (bool, i32) {
@@ -112,11 +115,24 @@ fn reverse(pair: (i32, bool)) -> (bool, i32) {
     (boolean, integer)
 }
 
+fn transpose(mat: Matrix) -> Matrix{
+    Matrix(mat.0, mat.2, mat.1, mat.2)
+}
+
 
                         // NEXT: //
 
 // Make the anoted TODO tasks:
-// Remember and anote bitwise operations
+// Do the activities below: 
+
+// 1) Add the fmt::Display trait to the Matrix struct in the above example, 
+// so that if you switch from printing the debug format {:?} to the display format {},
+// you see the following output:
+// ( 1.1 1.2 )
+// ( 2.1 2.2 )
+
+
+
 
                         // SOMES RUST BITWISE OPERATORS //
                     
