@@ -18,6 +18,7 @@ struct Nil;
 struct Pair(i32, f32);
 
 // A struct with two fields
+#[derive(Debug)]
 struct Point {
     x: f32,
     y: f32,
@@ -25,6 +26,7 @@ struct Point {
 
 // Structs can be reused as fields of another struct
 #[allow(dead_code)]
+#[derive(Debug)]
 struct Rectangle {
     // A rectangle can be specified by where the top left and bottom right
     // corners are in space.
@@ -79,7 +81,14 @@ pub fn run() {
             let width = self.top_left.x - self.bottom_right.x;
             (height * width).abs()
         }
+
+        fn square(origin: Point, size: f32) -> Rectangle{
+            Rectangle{top_left: {Point{x: origin.x, y: origin.x+size}}, 
+                      bottom_right: {Point{x: origin.y+size, y: origin.x}}}
+        }
+
     }
+     
 
     // Instantiate a unit struct
     let _nil = Nil;
@@ -96,6 +105,14 @@ pub fn run() {
     println!("pair contains {:?} and {:?}", integer, decimal);
 
     println!("The area of rectangle is {:.2}",rect.area());
+
+    let sqr = Rectangle::square(Point{x: 0.0, y:0.0},30.0);
+
+    println!("The square: {:?}", sqr);
+
+    println!("The area of rectangle is {:.2}",sqr.area());
+    
+
 }
 
                         // NEXT //

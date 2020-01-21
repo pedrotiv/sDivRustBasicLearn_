@@ -1,6 +1,8 @@
-mod structures;
+// mod structures;
+mod enums;
 
 
 fn main() {
-    structures::run();
+    // structures::run();
+    enums::run();
 }
