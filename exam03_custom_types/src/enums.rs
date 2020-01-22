@@ -33,6 +33,8 @@ fn inspect(event: WebEvent) {
 }
 
 pub fn run() {
+
+    // Create some events:
     let pressed = WebEvent::KeyPress('x');
     // `to_owned()` creates an owned `String` from a string slice.
     let pasted  = WebEvent::Paste("my text".to_owned());
@@ -41,13 +43,106 @@ pub fn run() {
     let load    = WebEvent::PageLoad;
     let unload  = WebEvent::PageUnload;
 
+    
     inspect(pressed);
     inspect(pasted);
     inspect(click);
     inspect(load);
     inspect(unload);
+
+    run_01();
+    run_02();
+    run_03();
 }
 
                     // TYPE ALIASES //
 
+// If you use a type alias, you can refer to each enum variant via its alias. 
+// This might be useful if the enum's name is too long or too generic, and you want to rename it.
+enum VeryVerboseEnumOfThingsToDoWithNumbers {
+    Add,
+    Subtract,
+}
+
+// Creates a type alias
+type Operations = VeryVerboseEnumOfThingsToDoWithNumbers;
+
+fn run_01() {
+    // We can refer to each variant via its alias, not its long and inconvenient
+    // name.
+    let x = Operations::Add;
+}
+// The most common place you'll see this is in impl blocks using the "Self" alias.
+impl VeryVerboseEnumOfThingsToDoWithNumbers {
+    fn run(&self, x: i32, y: i32) -> i32 {
+        match self {
+            Self::Add => x + y,
+            Self::Subtract => x - y,
+        }
+    }
+}
+
+                        // USE //
+// The use declaration can be used so manual scoping isn't needed:     
+
+enum Status {
+    Rich,
+    Poor,
+}
+
+enum Work {
+    Civilian,
+    Soldier,
+}
+
+fn run_02() {
+    // Explicitly `use` each name so they are available without
+    // manual scoping.
+    use crate::enums::Status::{Poor, Rich};
+    // Automatically `use` each name inside `Work`.
+    use crate::enums::Work::*;
+
+    // Equivalent to `Status::Poor`.
+    let status = Poor;
+    // Equivalent to `Work::Civilian`.
+    let work = Civilian;
+
+    match status {
+        // Note the lack of scoping because of the explicit `use` above.
+        Rich => println!("The rich have lots of money!"),
+        Poor => println!("The poor have no money..."),
+    }
+
+    match work {
+        // Note again the lack of scoping.
+        Civilian => println!("Civilians work!"),
+        Soldier  => println!("Soldiers fight!"),
+    }
+}
+
+                    // C-LIKE ENUMS //
+// enum can also be used as C-like enums: 
+
+// enum with implicit discriminator (starts at 0)
+enum Number {
+    Zero,
+    One,
+    Two,
+}
+
+// enum with explicit discriminator
+enum Color {
+    Red = 0xff0000,
+    Green = 0x00ff00,
+    Blue = 0x0000ff,
+}
+
+fn run_03() {
+    // `enums` can be cast as integers.
+    println!("zero is {}", Number::Zero as i32);
+    println!("one is {}", Number::One as i32);
+
+    println!("roses are #{:06x}", Color::Red as i32);
+    println!("violets are #{:06x}", Color::Blue as i32);
+}
 
