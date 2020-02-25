@@ -14,6 +14,7 @@ enum Message {
 // easily define a function to take any of these kinds of messages
 impl Message {
     fn call(&self) {
+        println!("Hi, I'm called");        
         // method body would be defined here
     }
 }
